@@ -1,0 +1,13 @@
+{
+  "name": "nguonchhay_nodelearning",
+  "description": "This is a sample repository for learning NodeJs, ReactJs and MongoDb",
+  "scripts": {
+    "local_start": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
