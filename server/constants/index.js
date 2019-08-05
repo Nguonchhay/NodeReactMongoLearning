@@ -1,5 +1,11 @@
 const URL_HOME = '/'
 
 module.exports = {
-    URL_HOME
+    URL_HOME,
+    URL_REGISTER,
+    URL_VERIFY_CODE,
+    URL_USERS_LIST,
+    URL_USERS_STORE,
+    URL_USERS_UPDATE,
+    URL_USERS_DELETE
 }
