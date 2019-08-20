@@ -1,11 +1,14 @@
 {
   "name": "nguonchhay_nodelearning",
   "description": "This is a sample repository for learning NodeJs, ReactJs and MongoDb",
+  "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "local_start": "nodemon index.js"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-edge": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
