@@ -1,5 +1,14 @@
 const URL_HOME = '/'
 
+const URL_USER = '/users'
+const URL_USER_CREATE = '/users/create'
+const URL_USER_STORE = '/users/store';
+
 module.exports = {
-    URL_HOME
+    url: {
+        URL_HOME,
+        URL_USER,
+        URL_USER_CREATE,
+        URL_USER_STORE
+    }
 }
