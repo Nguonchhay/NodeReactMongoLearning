@@ -22,7 +22,7 @@ git clone git@github.com:Nguonchhay/NodeReactMongoLearning.git node-reactjs-mong
 * Install dependencies for server `NodeJs`
 ```
 cd server
-npm install
+yarn install
 ```
 
 * Install depencies for client `ReactJs`
@@ -41,7 +41,7 @@ __Note__: update values in the file
 * Start server application
 ```
 cd server
-node index.js
+yarn start
 ```
 
 * Start client application
