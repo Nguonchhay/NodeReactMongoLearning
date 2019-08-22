@@ -1,12 +1,16 @@
 const express = require('express')
 const path = require('path')
 const expressEdge = require('express-edge')
+const mongoose = require('mongoose')
 
 const ENV = require(path.resolve(__dirname, 'config/env.js'))
 const CONSTANT = require(path.resolve(__dirname, 'constants/index.js'))
 
 // Create application context
 const app = express()
+
+// MongoDB connection
+mongoose.connect(ENV.mongo.uri + '/' + ENV.mongo.db)
 
 // Integrate template engihe
 app.use(expressEdge)
