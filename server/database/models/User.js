@@ -4,7 +4,9 @@ const UserSchema = mongoose.Schema({
     role: String,
     name: String,
     email: String,
-    password: String
+    password: String,
+    sex: String,
+    profile: String
 })
 
 const User = mongoose.model('User', UserSchema)

@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js --ignore public/theme/vendor --ignore node_modules"
   },
   "engines": {
     "node": "10.15.x",

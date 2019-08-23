@@ -12,16 +12,16 @@
   <title>SB Admin - Dashboard</title>
 
   <!-- Font awesome -->
-  <link href="theme/vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/theme/vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Page level plugin CSS-->
-  <link href="theme/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <link href="/theme/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="theme/css/sb-admin.css" rel="stylesheet">
+  <link href="/theme/css/sb-admin.css" rel="stylesheet">
 
   <!-- Override style -->
-  <link href="css/app.css" rel="stylesheet">
+  <link href="/css/app.css" rel="stylesheet">
 
 </head>
 
@@ -30,7 +30,7 @@
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
     <a class="navbar-brand mr-1 logo" href="/">
-      <img src="image/logo.png" />
+      <img src="/image/logo.png" />
     </a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
@@ -99,6 +99,14 @@
           <span>Dashboard</span>
         </a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/users">
+          <i class="fas fa-fw fa-user"></i>
+          <span>Users</span>
+        </a>
+      </li>
+
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-folder"></i>
@@ -166,23 +174,23 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="theme/vendor/jquery/jquery.min.js"></script>
-  <script src="theme/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/theme/vendor/jquery/jquery.min.js"></script>
+  <script src="/theme/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="theme/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="/theme/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Page level plugin JavaScript-->
-  <script src="theme/vendor/datatables/jquery.dataTables.js"></script>
-  <script src="theme/vendor/datatables/dataTables.bootstrap4.js"></script>
+  <script src="/theme/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="/theme/vendor/datatables/dataTables.bootstrap4.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="theme/js/sb-admin.min.js"></script>
+  <script src="/theme/js/sb-admin.min.js"></script>
 
   @!section('script')
 
   <!-- Override script -->
-  <script src="js/app.js"></script>
+  <script src="/js/app.js"></script>
 
 </body>
 
