@@ -9,15 +9,15 @@
       </div>
 
       <div class="card-body">
-          <form method="POST" action="/users/store" enctype="multipart/form-data">
+          <form method="POST" action="/users/store">
               <div class="form-group">
                   <div class="form-row">
                       <div class="col-md-6">
                           <label for="sel1">Role *</label>
-                          <select class="form-control" name="role">
-                            <option>-- Please select one ---</option>
+                          <select class="form-control" name="role" required>
+                            <option vlaue="">-- Please select one ---</option>
                             <option value="Editor">Editor</option>
-                            <option value="Editor">Admin</option>
+                            <option value="Admin">Admin</option>
                           </select>
                       </div>
                       <div class="col-md-6">
@@ -31,12 +31,12 @@
                   <div class="form-row">
                     <div class="col-md-6">
                         <label for="firstName">Email *</label>
-                        <input type="email" id="email" class="form-control" placeholder="Email" required="required" autofocus="autofocus">                        
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>                        
                     </div>
                     <div class="col-md-6">
                         <label for="sex">Sex</label><br>
-                        <label class="radio-inline"><input type="radio" name="sex" checked>Male</label>
-                        <label class="radio-inline"><input type="radio" name="sex">Femail</label>
+                        <label class="radio-inline"><input type="radio" name="sex" value="Male" checked>Male</label>
+                        <label class="radio-inline"><input type="radio" name="sex" value="Female">Femail</label>
                     </div>
                   </div>
                 </div>
@@ -45,29 +45,31 @@
                 <div class="form-row">
                   <div class="col-md-6">
                       <label for="password">Password *</label>
-                      <input type="password" id="password" class="form-control" placeholder="Password must be at least 8 characters" required="required">
+                      <input type="password" id="password" name="password" class="form-control" placeholder="Password must be at least 8 characters" required>
                   </div>
                   <div class="col-md-6">
                       <label for="confirmPassword">Confirm password *</label>
-                      <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm password must be at least 8 characters" required="required">
+                      <input type="password" id="confirmPassword" name="confirm_password" class="form-control" placeholder="Confirm password must be at least 8 characters">
                   </div>
                 </div>
               </div>
 
-              <div class="form-group">
-                  <div class="form-row">
-                    <div class="col-md-6">
-                        <label for="profile">Profile *</label>
-                        <input type="file" id="profile" name="profile" class="form-control" />
-                    </div>
+              <!--<div class="form-group">
+                <div class="form-row">
+                  <div class="col-md-6">
+                      <label for="profile">Profile *</label>
+                      <input type="file" id="profile" name="profile" class="form-control" />
                   </div>
                 </div>
+              </div-->
   
 
               <div class="form-group">
                   <div class="form-row">
                     <div class="col-md-2">
-                        <a class="btn btn-primary btn-block" href="login.html">Save</a>
+                        <button class="btn btn-primary btn-block" type="submit">
+                            <i class="fas fa-fw fa-save"></i> Save
+                        </button>
                     </div>
                   </div>
               </div>

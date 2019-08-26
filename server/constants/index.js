@@ -8,6 +8,8 @@ const URL_USER_EDIT = '/users/:id/edit'
 const URL_USER_UPDATE = '/users/:id/update';
 const URL_USER_DELETE = '/users/:id/delete';
 
+const bcryptSaltRound = 10
+
 module.exports = {
     url: {
         URL_HOME,
@@ -18,5 +20,6 @@ module.exports = {
         URL_USER_EDIT,
         URL_USER_UPDATE,
         URL_USER_DELETE
-    }
+    },
+    bcryptSaltRound
 }

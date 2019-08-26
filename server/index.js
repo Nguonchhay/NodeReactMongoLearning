@@ -1,10 +1,13 @@
 const express = require('express')
-const path = require('path')
 const expressEdge = require('express-edge')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
+const bcrypt = require('bcrypt')
+const path = require('path')
 
-const ENV = require(path.resolve(__dirname, 'config/env.js'))
-const CONSTANT = require(path.resolve(__dirname, 'constants/index.js'))
+const ENV = require(path.resolve(__dirname, 'config/env'))
+const CONSTANT = require(path.resolve(__dirname, 'constants'))
+const User = require(path.resolve(__dirname, 'database/models/User'))
 
 // Create application context
 const app = express()
@@ -15,6 +18,9 @@ mongoose.connect(ENV.mongo.uri + '/' + ENV.mongo.db)
 // Integrate template engihe
 app.use(expressEdge)
 app.set('views', `${__dirname}/views`)
+
+// Body parser to format incoming data
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Configure stattic assets
 app.use(express.static('public'))
@@ -35,6 +41,26 @@ app.get(CONSTANT.url.URL_USER, (req, res) => {
 
 app.get(CONSTANT.url.URL_USER_CREATE, (req, res) => {
     return res.render('users_create')
+})
+
+app.post(CONSTANT.url.URL_USER_STORE, (req, res) => {
+    const formData = req.body
+
+    bcrypt.hash(formData.password, CONSTANT.bcryptSaltRound, (err, hash) => {
+        const userData = {
+            role: formData.role,
+            name: formData.name,
+            email: formData.email,
+            password: hash,
+            sex: formData.sex,
+            profile: ''
+        }
+        User.create(userData, (err, user) => {
+            console.log('Created user: ')
+            console.log(user)
+            res.redirect(CONSTANT.url.URL_USER)
+        })
+    })
 })
 
 app.get(CONSTANT.url.URL_USER_EDIT, (req, res) => {
