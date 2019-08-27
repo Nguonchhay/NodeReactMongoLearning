@@ -35,8 +35,12 @@ app.get(CONSTANT.url.URL_CHART, (req, res) => {
     return res.render('chart')
 })
 
-app.get(CONSTANT.url.URL_USER, (req, res) => {
-    return res.render('users_index')
+app.get(CONSTANT.url.URL_USER, async (req, res) => {
+    const users = await User.find({})
+
+    return res.render('users_index', {
+        users
+    })
 })
 
 app.get(CONSTANT.url.URL_USER_CREATE, (req, res) => {
@@ -63,8 +67,11 @@ app.post(CONSTANT.url.URL_USER_STORE, (req, res) => {
     })
 })
 
-app.get(CONSTANT.url.URL_USER_EDIT, (req, res) => {
-    return res.render('users_edit')
+app.get(CONSTANT.url.URL_USER_EDIT, async (req, res) => {
+    const user = await User.findById(req.params.id)
+    return res.render('users_edit', {
+        user
+    })
 })
 
 // Start serve with predefine port

@@ -4,12 +4,12 @@
   <div class="container-fluid">
     <div class="card mb-3">
       <div class="card-header">
-        <i class="fas fa-plus"></i>
-        New User
+        <i class="fas fa-edit"></i>
+        Edit User <strong>{{ user.name }}</strong>
       </div>
 
       <div class="card-body">
-          <form method="POST" action="/users/store">
+          <form method="POST" action="/users/{{ user.id }}/update">
               <div class="form-group">
                   <div class="form-row">
                       <div class="col-md-6">
