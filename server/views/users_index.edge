@@ -35,7 +35,11 @@
                   <td>{{ user.name }}</td>
                   <td>{{ user.email }}</td>
                   <td>{{ user.sex }}</td>
-                  <td>{{ user.profile }}</td>
+                  <td>
+                    @if(user.profile)
+                      <img src="{{ user.profile }}" class="avata">
+                    @endif
+                  </td>
                   <td>{{ user.createdAt.toDateString() }}</td>
                   <td>
                     <ul>

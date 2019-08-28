@@ -9,6 +9,8 @@ const URL_USER_UPDATE = '/users/:id/update';
 const URL_USER_DELETE = '/users/:id/delete';
 
 const bcryptSaltRound = 10
+const uploadFilePath = 'public/uploads'
+const readUploadFilePath = '/uploads'
 
 module.exports = {
     url: {
@@ -21,5 +23,7 @@ module.exports = {
         URL_USER_UPDATE,
         URL_USER_DELETE
     },
-    bcryptSaltRound
+    bcryptSaltRound,
+    uploadFilePath,
+    readUploadFilePath
 }

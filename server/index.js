@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const bcrypt = require('bcrypt')
 const path = require('path')
+const fileUpload = require('express-fileupload')
 
 const ENV = require(path.resolve(__dirname, 'config/env'))
 const CONSTANT = require(path.resolve(__dirname, 'constants'))
@@ -19,8 +20,12 @@ mongoose.connect(ENV.mongo.uri + '/' + ENV.mongo.db)
 app.use(expressEdge)
 app.set('views', `${__dirname}/views`)
 
+app.use(bodyParser.json())
 // Body parser to format incoming data
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// File upload
+app.use(fileUpload())
 
 // Configure stattic assets
 app.use(express.static('public'))
@@ -51,19 +56,30 @@ app.post(CONSTANT.url.URL_USER_STORE, (req, res) => {
     const formData = req.body
 
     bcrypt.hash(formData.password, CONSTANT.bcryptSaltRound, (err, hash) => {
-        const userData = {
-            role: formData.role,
-            name: formData.name,
-            email: formData.email,
-            password: hash,
-            sex: formData.sex,
-            profile: ''
+        let userData = {
+            ...formData,
+            password: hash
         }
-        User.create(userData, (err, user) => {
-            console.log('Created user: ')
-            console.log(user)
-            res.redirect(CONSTANT.url.URL_USER)
-        })
+
+        const { profile } = req.files
+        if (profile) {
+            // Move upload file
+            profile.mv(path.resolve(__dirname, CONSTANT.uploadFilePath + '/' + profile.name), (err) => {
+                userData = {
+                    ...userData,
+                    profile: CONSTANT.readUploadFilePath + '/' + profile.name
+                }
+                // Store user to database
+                User.create(userData, (err, user) => {
+                    res.redirect(CONSTANT.url.URL_USER)
+                })
+            })
+        } else {
+            // Store user to database
+            User.create(userData, (err, user) => {
+                res.redirect(CONSTANT.url.URL_USER)
+            })
+        }
     })
 })
 
