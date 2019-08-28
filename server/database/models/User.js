@@ -8,7 +8,15 @@ const UserSchema = mongoose.Schema({
     email: String,
     password: String,
     sex: String,
-    profile: String
+    profile: String,
+    createdAt: {
+        type: Date,
+        default: new Date()
+    },
+    updatedAt: {
+        type: Date,
+        default: new Date()
+    }
 })
 
 const User = mongoose.model('User', UserSchema)
