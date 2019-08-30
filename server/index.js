@@ -30,6 +30,16 @@ app.use(fileUpload())
 // Configure stattic assets
 app.use(express.static('public'))
 
+// Custom middleware
+const userCreatedMiddleware = (req, res, next) => {
+    if (!req.body.name || res.body.email || !res.body.password || !res.body.confirmPassword || !res.body.sex) {
+        return res.redirect(CONSTANT.url.URL_USER_CREATE)
+    }
+    next()
+}
+
+app.use(CONSTANT.url.URL_USER_STORE, userCreatedMiddleware)
+
 // Start routing
 
 app.get(CONSTANT.url.URL_HOME, (req, res) => {
