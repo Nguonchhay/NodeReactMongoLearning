@@ -30,7 +30,7 @@
             <tbody>
               @each(user in users)
                 <tr>
-                  <td></td>
+                  <td>{{ ($loop.index + 1) }}</td>
                   <td>{{ user.role }}</td>
                   <td>{{ user.name }}</td>
                   <td>{{ user.email }}</td>
@@ -47,7 +47,11 @@
                       <a href="/users/{{ user.id }}/edit"><i class="far fa-edit"></i> Edit</a>
                       </li>
                       <li>
-                        <a href="/users/{{ user.id }}/delete"><i class="fas fa-fw fa-trash"></i>Delete </a>
+                        <form action="/users/{{ user.id }}/delete" method="POST">
+                          <button type="submit" onClick="return confirm('Are you sure?');" href="">
+                            <i class="fas fa-fw fa-trash"></i>Delete
+                          </button>
+                        </form>
                       </li>
                     </ul>
                   </td>

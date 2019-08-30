@@ -90,6 +90,15 @@ app.get(CONSTANT.url.URL_USER_EDIT, async (req, res) => {
     })
 })
 
+app.post(CONSTANT.url.URL_USER_DELETE, (req, res) => {
+    User.deleteOne({_id: req.params.id}, (err) => {
+        if (err) {
+            console.log(err)
+        }
+        res.redirect(CONSTANT.url.URL_USER)
+    })
+})
+
 // Start serve with predefine port
 app.listen(ENV.PORT, () => {
     console.log('Server started on port: ' + ENV.PORT)
