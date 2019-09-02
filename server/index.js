@@ -2,13 +2,14 @@ const express = require('express')
 const expressEdge = require('express-edge')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
-const bcrypt = require('bcrypt')
 const path = require('path')
 const fileUpload = require('express-fileupload')
 
 const ENV = require(path.resolve(__dirname, 'config/env'))
 const CONSTANT = require(path.resolve(__dirname, 'constants'))
-const User = require(path.resolve(__dirname, 'database/models/User'))
+
+// Controllers
+const userController = require('./controllers/userController')
 
 // Create application context
 const app = express()
@@ -32,7 +33,7 @@ app.use(express.static('public'))
 
 // Custom middleware
 const userCreatedMiddleware = (req, res, next) => {
-    if (!req.body.name || res.body.email || !res.body.password || !res.body.confirmPassword || !res.body.sex) {
+    if (!req.body.name || !req.body.email || !req.body.password || !req.body.confirmPassword || !req.body.sex) {
         return res.redirect(CONSTANT.url.URL_USER_CREATE)
     }
     next()
@@ -50,64 +51,11 @@ app.get(CONSTANT.url.URL_CHART, (req, res) => {
     return res.render('chart')
 })
 
-app.get(CONSTANT.url.URL_USER, async (req, res) => {
-    const users = await User.find({})
-
-    return res.render('users_index', {
-        users
-    })
-})
-
-app.get(CONSTANT.url.URL_USER_CREATE, (req, res) => {
-    return res.render('users_create')
-})
-
-app.post(CONSTANT.url.URL_USER_STORE, (req, res) => {
-    const formData = req.body
-
-    bcrypt.hash(formData.password, CONSTANT.bcryptSaltRound, (err, hash) => {
-        let userData = {
-            ...formData,
-            password: hash
-        }
-
-        const { profile } = req.files
-        if (profile) {
-            // Move upload file
-            profile.mv(path.resolve(__dirname, CONSTANT.uploadFilePath + '/' + profile.name), (err) => {
-                userData = {
-                    ...userData,
-                    profile: CONSTANT.readUploadFilePath + '/' + profile.name
-                }
-                // Store user to database
-                User.create(userData, (err, user) => {
-                    res.redirect(CONSTANT.url.URL_USER)
-                })
-            })
-        } else {
-            // Store user to database
-            User.create(userData, (err, user) => {
-                res.redirect(CONSTANT.url.URL_USER)
-            })
-        }
-    })
-})
-
-app.get(CONSTANT.url.URL_USER_EDIT, async (req, res) => {
-    const user = await User.findById(req.params.id)
-    return res.render('users_edit', {
-        user
-    })
-})
-
-app.post(CONSTANT.url.URL_USER_DELETE, (req, res) => {
-    User.deleteOne({_id: req.params.id}, (err) => {
-        if (err) {
-            console.log(err)
-        }
-        res.redirect(CONSTANT.url.URL_USER)
-    })
-})
+app.get(CONSTANT.url.URL_USER, userController.listUser)
+app.get(CONSTANT.url.URL_USER_CREATE, userController.createUser)
+app.post(CONSTANT.url.URL_USER_STORE, userController.storeUser)
+app.get(CONSTANT.url.URL_USER_EDIT, userController.editUser)
+app.post(CONSTANT.url.URL_USER_DELETE, userController.deleteUser)
 
 // Start serve with predefine port
 app.listen(ENV.PORT, () => {
