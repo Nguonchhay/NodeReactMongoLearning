@@ -1,6 +1,8 @@
-'use strict';
-
 const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
+
+const CONSTANT = require('./../../constants')
+
 
 const UserSchema = mongoose.Schema({
     role: String,
@@ -19,6 +21,16 @@ const UserSchema = mongoose.Schema({
     }
 })
 
-const User = mongoose.model('User', UserSchema)
+UserSchema.pre('save', (next) => {
+    const user = this
+    console.log(user)
+    bcrypt.hash(user.password, CONSTANT.bcryptSaltRound, (error, encrypted) => {
+        console.log(encrypted)
+        user.password = encrypted
+        console.log(user)
 
-module.exports = User
+        next()
+    })
+})
+
+module.exports = mongoose.model('User', UserSchema)
