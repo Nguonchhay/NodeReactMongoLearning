@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 const path = require('path')
-const User = require('../database/models/User')
+const User = require('./../database/models/User')
 
 const CONSTANT = require('./../constants')
 

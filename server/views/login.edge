@@ -1,0 +1,34 @@
+@layout('layouts.blank')
+
+@section('content')
+  <div class="container-fluid">
+    <div class="card mb-3 col-md-4">
+      <div class="card-header">
+        <i class="fas fa-lock"></i>
+        Login
+      </div>
+
+      <div class="card-body">
+          <form method="POST" action="/users/login">
+            <div class="form-row">
+              <div class="col-md-12 form-group">
+                  <label for="firstName">Email *</label>
+                  <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>                        
+              </div>
+
+              <div class="col-md-12 form-group">
+                  <label for="password">Password *</label>
+                  <input type="password" id="password" name="password" class="form-control" placeholder="Password must be at least 8 characters" required>
+              </div>
+
+              <div class="col-md-12 form-group">
+                  <button class="btn btn-primary btn-block" type="submit">
+                      <i class="fas fa-fw fa-save"></i> Save
+                  </button>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+@endsection

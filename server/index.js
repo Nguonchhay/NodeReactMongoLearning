@@ -10,6 +10,7 @@ const CONSTANT = require(path.resolve(__dirname, 'constants'))
 
 // Controllers
 const userController = require('./controllers/userController')
+const loginController = require('./controllers/loginController')
 
 // Create application context
 const app = express()
@@ -45,6 +46,9 @@ app.get(CONSTANT.url.URL_HOME, (req, res) => {
 app.get(CONSTANT.url.URL_CHART, (req, res) => {
     return res.render('chart')
 })
+
+app.get(CONSTANT.url.URL_LOGIN_FORM, loginController.loginForm)
+app.post(CONSTANT.url.URL_USER_LOGIN, loginController.login)
 
 app.get(CONSTANT.url.URL_USER, userController.listUser)
 app.get(CONSTANT.url.URL_USER_CREATE, userController.createUser)
