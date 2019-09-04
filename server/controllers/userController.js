@@ -36,12 +36,18 @@ const storeUser = async (req, res) => {
                 }
                 // Store user to database
                 User.create(userData, (err, user) => {
+                    if (err) {
+                        return res.redirect(CONSTANT.USER_CREATE)
+                    }
                     res.redirect(CONSTANT.url.URL_USER)
                 })
             })
         } else {
             // Store user to database
             User.create(userData, (err, user) => {
+                if (err) {
+                    return res.redirect(CONSTANT.USER_CREATE)
+                }
                 res.redirect(CONSTANT.url.URL_USER)
             })
         }
