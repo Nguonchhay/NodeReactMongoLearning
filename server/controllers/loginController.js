@@ -14,6 +14,9 @@ const login = (req, res) => {
         if (user) {
             bcrypt.compare(password, user.password, (err, isMatch) => {
                 if (isMatch) {
+                    // Store user session
+                    req.session.userId = user._id
+
                     return res.redirect(CONSTANT.url.URL_USER)
                 } else {
                     return res.redirect(CONSTANT.url.URL_LOGIN_FORM)

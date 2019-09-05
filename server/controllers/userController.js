@@ -6,15 +6,22 @@ const CONSTANT = require('./../constants')
 
 
 const listUser = async (req, res) => {
-    const users = await User.find({})
+    if (req.session.userId) {
+        const users = await User.find({})
 
-    return res.render('users_index', {
-        users
-    })
+        return res.render('users_index', {
+            users
+        })
+    }
+
+    res.redirect(CONSTANT.url.URL_HOME)
 }
 
 const createUser = (req, res) => {
-    return res.render('users_create')
+    if (req.session.userId) {
+        return res.render('users_create')
+    }
+    res.redirect(CONSTANT.url.URL_HOME)
 }
 
 const storeUser = async (req, res) => {
