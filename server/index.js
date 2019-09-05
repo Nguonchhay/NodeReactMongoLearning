@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const path = require('path')
 const fileUpload = require('express-fileupload')
 const expressSession = require('express-session')
+const connnectMongo = require('connect-mongo')
 
 const ENV = require(path.resolve(__dirname, 'config/env'))
 const CONSTANT = require(path.resolve(__dirname, 'constants'))
@@ -16,13 +17,17 @@ const loginController = require('./controllers/loginController')
 // Create application context
 const app = express()
 
-// Use session
-app.use(expressSession({
-    secret: ENV.sessionSecret
-}))
-
 // MongoDB connection
 mongoose.connect(ENV.mongo.uri + '/' + ENV.mongo.db)
+
+// Use session
+const mongoStore = connnectMongo(expressSession)
+app.use(expressSession({
+    secret: ENV.sessionSecret,
+    store: new mongoStore({
+        mongooseConnection: mongoose.connection
+    })
+}))
 
 // Integrate template engihe
 app.use(expressEdge)
