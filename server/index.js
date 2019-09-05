@@ -10,6 +10,9 @@ const connnectMongo = require('connect-mongo')
 const ENV = require(path.resolve(__dirname, 'config/env'))
 const CONSTANT = require(path.resolve(__dirname, 'constants'))
 
+// Middleware
+const authMiddleware = require('./middlewares/authMiddleware')
+
 // Controllers
 const userController = require('./controllers/userController')
 const loginController = require('./controllers/loginController')
@@ -61,11 +64,11 @@ app.get(CONSTANT.url.URL_CHART, (req, res) => {
 app.get(CONSTANT.url.URL_LOGIN_FORM, loginController.loginForm)
 app.post(CONSTANT.url.URL_USER_LOGIN, loginController.login)
 
-app.get(CONSTANT.url.URL_USER, userController.listUser)
-app.get(CONSTANT.url.URL_USER_CREATE, userController.createUser)
-app.post(CONSTANT.url.URL_USER_STORE, userController.storeUser)
-app.get(CONSTANT.url.URL_USER_EDIT, userController.editUser)
-app.post(CONSTANT.url.URL_USER_DELETE, userController.deleteUser)
+app.get(CONSTANT.url.URL_USER, authMiddleware, userController.listUser)
+app.get(CONSTANT.url.URL_USER_CREATE, authMiddleware, userController.createUser)
+app.post(CONSTANT.url.URL_USER_STORE, authMiddleware, userController.storeUser)
+app.get(CONSTANT.url.URL_USER_EDIT, authMiddleware, userController.editUser)
+app.post(CONSTANT.url.URL_USER_DELETE, authMiddleware, userController.deleteUser)
 
 // Start serve with predefine port
 app.listen(ENV.PORT, () => {
