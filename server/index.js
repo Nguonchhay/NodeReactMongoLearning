@@ -6,6 +6,7 @@ const path = require('path')
 const fileUpload = require('express-fileupload')
 const expressSession = require('express-session')
 const connnectMongo = require('connect-mongo')
+const connnectFlash = require('connect-flash')
 
 const ENV = require(path.resolve(__dirname, 'config/env'))
 const CONSTANT = require(path.resolve(__dirname, 'constants'))
@@ -32,6 +33,9 @@ app.use(expressSession({
     })
 }))
 
+// Flash message
+app.use(connnectFlash())
+
 // Integrate template engihe
 app.use(expressEdge)
 app.set('views', `${__dirname}/views`)
@@ -45,11 +49,6 @@ app.use(fileUpload())
 
 // Configure stattic assets
 app.use(express.static('public'))
-
-// Custom middleware
-const userMiddleware = require('./middlewares/userMiddleware')
-
-app.use(CONSTANT.url.URL_USER_STORE, userMiddleware.storeUser)
 
 // Start routing
 

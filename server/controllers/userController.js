@@ -19,7 +19,9 @@ const listUser = async (req, res) => {
 
 const createUser = (req, res) => {
     if (req.session.userId) {
-        return res.render('users_create')
+        return res.render('users_create', {
+            errors: req.flash('errorUserCreate')
+        })
     }
     res.redirect(CONSTANT.url.URL_HOME)
 }
@@ -33,8 +35,8 @@ const storeUser = async (req, res) => {
             password: hash
         }
 
-        const { profile } = req.files
-        if (profile) {
+        if (req.files && req.files.profile) {
+            const { profile } = req.files
             // Move upload file
             profile.mv(path.resolve(__dirname, '../' + CONSTANT.uploadFilePath + '/' + profile.name), (err) => {
                 userData = {
@@ -44,7 +46,9 @@ const storeUser = async (req, res) => {
                 // Store user to database
                 User.create(userData, (err, user) => {
                     if (err) {
-                        return res.redirect(CONSTANT.USER_CREATE)
+                        const errorUserCreate = Object.keys(err.errors).map(key => err.errors[key].message)
+                        req.flash('errorUserCreate', errorUserCreate)
+                        return res.redirect(CONSTANT.url.URL_USER_CREATE)
                     }
                     res.redirect(CONSTANT.url.URL_USER)
                 })
@@ -53,7 +57,9 @@ const storeUser = async (req, res) => {
             // Store user to database
             User.create(userData, (err, user) => {
                 if (err) {
-                    return res.redirect(CONSTANT.USER_CREATE)
+                    const errorUserCreate = Object.keys(err.errors).map(key => err.errors[key].message)
+                    req.flash('errorUserCreate', errorUserCreate)
+                    return res.redirect(CONSTANT.url.URL_USER_CREATE)
                 }
                 res.redirect(CONSTANT.url.URL_USER)
             })

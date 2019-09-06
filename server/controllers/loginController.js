@@ -4,6 +4,7 @@ const CONSTANT = require('./../constants')
 
 
 const loginForm = (req, res) => {
+    req.session.userId = null
     res.render('login')
 }
 

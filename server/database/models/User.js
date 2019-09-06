@@ -5,15 +5,15 @@ const mongoose = require('mongoose')
 const UserSchema = mongoose.Schema({
     role: {
         type: String,
-        required: true
+        required: [true, 'Role is required']
     },
     name: {
         type: String,
-        required: true
+        required: [true, 'Full Name is required']
     },
     email:{
         type: String,
-        required: true,
+        required: [true, 'Email is required'],
         unique: true
     },
     password: String,
