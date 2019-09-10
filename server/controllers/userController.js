@@ -20,7 +20,8 @@ const listUser = async (req, res) => {
 const createUser = (req, res) => {
     if (req.session.userId) {
         return res.render('users_create', {
-            errors: req.flash('errorUserCreate')
+            errors: req.flash('errorUserCreate'),
+            data: req.flash('userData')[0]
         })
     }
     res.redirect(CONSTANT.url.URL_HOME)
@@ -48,6 +49,7 @@ const storeUser = async (req, res) => {
                     if (err) {
                         const errorUserCreate = Object.keys(err.errors).map(key => err.errors[key].message)
                         req.flash('errorUserCreate', errorUserCreate)
+                        req.flash('userData', req.body)
                         return res.redirect(CONSTANT.url.URL_USER_CREATE)
                     }
                     res.redirect(CONSTANT.url.URL_USER)
@@ -59,6 +61,7 @@ const storeUser = async (req, res) => {
                 if (err) {
                     const errorUserCreate = Object.keys(err.errors).map(key => err.errors[key].message)
                     req.flash('errorUserCreate', errorUserCreate)
+                    req.flash('userData', req.body)
                     return res.redirect(CONSTANT.url.URL_USER_CREATE)
                 }
                 res.redirect(CONSTANT.url.URL_USER)
