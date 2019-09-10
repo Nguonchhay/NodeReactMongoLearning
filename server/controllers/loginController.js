@@ -29,7 +29,14 @@ const login = (req, res) => {
     })
 }
 
+const logout = (req, res) => {
+    req.session.destroy(() => {
+        res.redirect(CONSTANT.url.URL_HOME)
+    })
+}
+
 module.exports = {
     loginForm,
-    login
+    login,
+    logout
 }
