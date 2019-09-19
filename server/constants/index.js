@@ -11,6 +11,13 @@ const URL_USER_EDIT = '/users/:id/edit'
 const URL_USER_UPDATE = '/users/:id/update'
 const URL_USER_DELETE = '/users/:id/delete'
 
+const URL_POSTS = '/posts'
+const URL_POSTS_CREATE = '/posts/create'
+const URL_POSTS_STORE = '/posts'
+const URL_POSTS_EDIT = '/posts/:id/edit'
+const URL_POSTS_UPDATE = '/posts/:id/update'
+const URL_POSTS_DELETE = '/posts/:id/delete'
+
 const bcryptSaltRound = 10
 const uploadFilePath = 'public/uploads'
 const readUploadFilePath = '/uploads'
@@ -27,7 +34,13 @@ module.exports = {
         URL_USER_DELETE,
         URL_LOGIN_FORM,
         URL_USER_LOGIN,
-        URL_LOGOUT
+        URL_LOGOUT,
+        URL_POSTS,
+        URL_POSTS_CREATE,
+        URL_POSTS_STORE,
+        URL_POSTS_EDIT,
+        URL_POSTS_UPDATE,
+        URL_POSTS_DELETE
     },
     bcryptSaltRound,
     uploadFilePath,

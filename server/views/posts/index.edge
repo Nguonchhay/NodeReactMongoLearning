@@ -1,0 +1,60 @@
+@layout('layouts.app')
+
+@section('content')
+  <div class="container-fluid">
+    <div class="card mb-3">
+      <div class="card-header">
+        <i class="fas fa-table"></i>
+        Posts
+      </div>
+
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Content</th>
+                <th>Thumbnail</th>
+                <th>Created at</th>
+                <th>
+                  <a href="/posts/create">
+                    <i class="fas fa-plus"></i> New
+                  </a>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              @each(post in posts)
+                <tr>
+                  <td>{{ ($loop.index + 1) }}</td>
+                  <td>{{ post.title }}</td>
+                  <td>{{ post.author.name }}</td>
+                  <td>{{ post.content }}</td>
+                  <td><img src="{{ post.thumbnail }}" class="avata"></td>
+                  <td>{{ post.createdAt.toDateString() }}</td>
+                  <td>
+                    <ul>
+                      <li>
+                      <a href="/posts/{{ post.id }}/edit"><i class="far fa-edit"></i> Edit</a>
+                      </li>
+                      <li>
+                        <form action="/posts/{{ post.id }}/delete" method="POST">
+                          <button type="submit" onClick="return confirm('Are you sure?');" href="">
+                            <i class="fas fa-fw fa-trash"></i>Delete
+                          </button>
+                        </form>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              @endeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+@endsection

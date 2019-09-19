@@ -18,6 +18,7 @@ const authMiddleware = require('./middlewares/authMiddleware')
 // Controllers
 const userController = require('./controllers/userController')
 const loginController = require('./controllers/loginController')
+const postController = require('./controllers/postController')
 
 // Create application context
 const app = express()
@@ -76,6 +77,10 @@ app.get(CONSTANT.url.URL_USER_CREATE, authMiddleware, userController.createUser)
 app.post(CONSTANT.url.URL_USER_STORE, authMiddleware, userController.storeUser)
 app.get(CONSTANT.url.URL_USER_EDIT, authMiddleware, userController.editUser)
 app.post(CONSTANT.url.URL_USER_DELETE, authMiddleware, userController.deleteUser)
+
+app.get(CONSTANT.url.URL_POSTS, authMiddleware, postController.listPost)
+app.get(CONSTANT.url.URL_POSTS_CREATE, authMiddleware, postController.createPost)
+app.post(CONSTANT.url.URL_POSTS_STORE, authMiddleware, postController.storePost)
 
 // Start serve with predefine port
 app.listen(ENV.PORT, () => {
