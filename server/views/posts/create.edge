@@ -36,7 +36,7 @@
                 <div class="form-row">
                   <div class="col-md-12">
                       <label for="content">Content</label>
-                      <textarea id="content" name="content" class="form-control">{{ data.content || '' }}</textarea>
+                      <textarea id="content" name="content" class="form-control summernote">{{ data.content || '' }}</textarea>
                   </div>
                 </div>
               </div>
@@ -54,4 +54,18 @@
       </div>
     </div>
   </div>
+@endsection
+
+@section('style')
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+@endsection
+
+@section('script')
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+  <script>
+    $('.summernote').summernote({
+      tabsize: 2,
+      height: 100
+    });
+  </script>
 @endsection
