@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 const expressEdge = require('express-edge')
 const edge = require('edge.js')
@@ -10,7 +12,6 @@ const connnectMongo = require('connect-mongo')
 const connnectFlash = require('connect-flash')
 const cloudinary = require('cloudinary')
 
-const ENV = require(path.resolve(__dirname, 'config/env'))
 const CONSTANT = require(path.resolve(__dirname, 'constants'))
 
 // Middleware
@@ -25,15 +26,19 @@ const postController = require('./controllers/postController')
 const app = express()
 
 // MongoDB connection
-mongoose.connect(ENV.mongo.uri + '/' + ENV.mongo.db)
+mongoose.connect(process.env.MONGO_URI + '/' + process.env.MONGO_DB)
 
 // Cloudinary config
-cloudinary.config(ENV.cloudinaryConfig)
+cloudinary.config({
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+    cloud_name: process.env.CLOUDINARY_NAME
+})
 
 // Use session
 const mongoStore = connnectMongo(expressSession)
 app.use(expressSession({
-    secret: ENV.sessionSecret,
+    secret: process.env.SESSION_SECRET,
     store: new mongoStore({
         mongooseConnection: mongoose.connection
     })
@@ -89,6 +94,6 @@ app.post(CONSTANT.url.URL_POSTS_STORE, authMiddleware, postController.storePost)
 app.use((req, res) => res.render('404'))
 
 // Start serve with predefine port
-app.listen(ENV.PORT, () => {
-    console.log('Server started on port: ' + ENV.PORT)
+app.listen(process.env.PORT, () => {
+    console.log('Server started on port: ' + process.env.PORT)
 })

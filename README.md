@@ -34,7 +34,7 @@ yarn install
 * Configure server configuration
 ```
 cd server
-cp -a config/env.js.examle config/env.js
+cp -a env.examle .env
 ```
 __Note__: update values in the file
 
