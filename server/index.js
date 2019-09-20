@@ -8,6 +8,7 @@ const fileUpload = require('express-fileupload')
 const expressSession = require('express-session')
 const connnectMongo = require('connect-mongo')
 const connnectFlash = require('connect-flash')
+const cloudinary = require('cloudinary')
 
 const ENV = require(path.resolve(__dirname, 'config/env'))
 const CONSTANT = require(path.resolve(__dirname, 'constants'))
@@ -25,6 +26,9 @@ const app = express()
 
 // MongoDB connection
 mongoose.connect(ENV.mongo.uri + '/' + ENV.mongo.db)
+
+// Cloudinary config
+cloudinary.config(ENV.cloudinaryConfig)
 
 // Use session
 const mongoStore = connnectMongo(expressSession)

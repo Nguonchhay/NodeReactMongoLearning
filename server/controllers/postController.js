@@ -2,6 +2,7 @@ const Post = require('./../database/models/Post')
 const User = require('./../database/models/User')
 const path = require('path')
 const CONSTANT = require('./../constants')
+const cloudinary = require('cloudinary')
 
 
 const listPost = async (req, res) => {
@@ -25,21 +26,28 @@ const storePost = (req, res) => {
     }
 
     const { thumbnail } = req.files
-    thumbnail.mv(path.resolve(__dirname, '../' + CONSTANT.uploadFilePath + '/posts/' + thumbnail.name), (err) => {
-        postData = {
-            ...postData,
-            thumbnail: CONSTANT.readUploadFilePath + '/posts/' + thumbnail.name
-        }
-
-        Post.create(postData, (err, post) => {
+    const fileNameAndPath = path.resolve(__dirname, '../' + CONSTANT.uploadFilePath + '/posts/' + thumbnail.name)
+    thumbnail.mv(fileNameAndPath, (err) => {
+        cloudinary.v2.uploader.upload(fileNameAndPath, (err, result) => {
             if (err) {
-                const errPostCreate = Object.keys(err.errors).map(key => err.errors[key].message)
-                req.flash('errorPostCreate', errPostCreate),
-                req.flash('postData', req.body)
                 return res.redirect(CONSTANT.url.URL_POSTS_CREATE)
             }
+
+            postData = {
+                ...postData,
+                thumbnail: result.secure_url
+            }
     
-            res.redirect(CONSTANT.url.URL_POSTS)
+            Post.create(postData, (err, post) => {
+                if (err) {
+                    const errPostCreate = Object.keys(err.errors).map(key => err.errors[key].message)
+                    req.flash('errorPostCreate', errPostCreate),
+                    req.flash('postData', req.body)
+                    return res.redirect(CONSTANT.url.URL_POSTS_CREATE)
+                }
+        
+                res.redirect(CONSTANT.url.URL_POSTS)
+            })
         })
     })
 }
