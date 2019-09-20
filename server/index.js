@@ -82,6 +82,8 @@ app.get(CONSTANT.url.URL_POSTS, authMiddleware, postController.listPost)
 app.get(CONSTANT.url.URL_POSTS_CREATE, authMiddleware, postController.createPost)
 app.post(CONSTANT.url.URL_POSTS_STORE, authMiddleware, postController.storePost)
 
+app.use((req, res) => res.render('404'))
+
 // Start serve with predefine port
 app.listen(ENV.PORT, () => {
     console.log('Server started on port: ' + ENV.PORT)
