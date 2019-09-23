@@ -12,6 +12,13 @@ const userController = require('./../controllers/userController')
 const loginController = require('./../controllers/loginController')
 const postController = require('./../controllers/postController')
 
+// Router middleware that happen all routes
+router.use((req, res, next) => {
+    console.log(req.method, req.url);
+
+    next()
+})
+
 // Start routing
 
 router.get(CONSTANT.url.URL_HOME, (req, res) => {
