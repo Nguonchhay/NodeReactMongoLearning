@@ -4,9 +4,6 @@ const express = require('express')
 const connnectFlash = require('connect-flash')
 const cloudinary = require('cloudinary')
 
-
-const routers = require('./routers/web')
-
 // Create application context
 const app = express()
 
@@ -30,7 +27,14 @@ require('./config/template')(app)
 require('./config/fileUpload')(app)
 
 // Routers
-app.use('/', routers)
+const routers = require('./routers')
+app.use('/', routers.webRouter)
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/api', routers.apiRouter)
+
+// 404 page
 app.use((req, res) => res.render('404'))
 
 // Start serve with predefine port
