@@ -8,7 +8,7 @@ Environment
 
 * Node >= 10.15.x
 
-* NPM >= 6.x or Yarn >= 1.16.x
+* NPM >= 6.x or Yarn >= 1.19.x
 
 * MongoDB >= 3.6.x
 
