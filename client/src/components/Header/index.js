@@ -10,17 +10,14 @@ import Navigation from './../Navigation';
 const Header = () => {
     const [isOpen, toggle] = useState(false);
 
-    const handleToggle = (isOpen) => {
-        toggle(!isOpen);
-    }
-
     return (
         <Navbar color="light" light expand="md">
           <NavbarBrand href="/">React Learning</NavbarBrand>
-          <NavbarToggler onClick={handleToggle} />
+          <NavbarToggler onClick={() => toggle(!isOpen)} />
           
           <Navigation isOpen={isOpen} />
         </Navbar>
+        
     );
 }
 
