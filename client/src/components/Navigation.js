@@ -1,10 +1,10 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import {
     Collapse,
     Nav,
     NavItem,
-    NavLink,
     UncontrolledDropdown,
     DropdownToggle,
     DropdownMenu,
@@ -20,7 +20,7 @@ const Navigation = (props) => {
             if (nav.children === undefined) {
                 return (
                     <NavItem key={nav.slug}>
-                        <NavLink href={nav.slug}>{nav.title}</NavLink>
+                        <NavLink to={nav.slug} className="nav-link" activeClassName="active">{nav.title}</NavLink>
                     </NavItem>
                 )
             }
@@ -35,7 +35,7 @@ const Navigation = (props) => {
                             nav.children.map(item => {
                                 return (
                                     <DropdownItem key={item.slug}>
-                                        <NavLink href={item.slug}>{item.title}</NavLink>
+                                        <NavLink to={item.slug} activeClassName="active" className="nav-link">{item.title}</NavLink>
                                     </DropdownItem>
                                 )
                             })
@@ -48,7 +48,7 @@ const Navigation = (props) => {
 
     return (
         <Collapse isOpen={props.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
+            <Nav className="ml-auto nav-main" navbar>
                 {renderNavigation()}
             </Nav>
         </Collapse>

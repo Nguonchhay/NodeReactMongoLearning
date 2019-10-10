@@ -1,0 +1,9 @@
+.navbar-light {
+    .navbar-nav {
+        .nav-link {
+            &.active {
+                color: $color-primary;
+            }
+        }
+    }
+}

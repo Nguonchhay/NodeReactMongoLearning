@@ -1,5 +1,6 @@
 import React from 'react';
 
+import './sass/app.scss';
 import AppRouter from './components/AppRouter';
 
 const App = () => {
