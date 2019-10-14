@@ -5,7 +5,13 @@ import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { StoreProvider } from './redux_like/Store';
+
+ReactDOM.render(
+    <StoreProvider>
+        <App />
+    </StoreProvider>
+,document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
