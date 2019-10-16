@@ -1,13 +1,17 @@
 import React, { createContext, useReducer } from 'react';
 
-import rootReducer from './Reducer';
+import rootReducer from './reducers';
 
 export const Store = createContext();
 
 const initState = {
-    authUser: {},
+    userReducer: {
+        authUser: null
+    },
     lang: 'en',
-    posts: []
+    postReducer: {
+        posts: []
+    }
 };
 
 export const StoreProvider = (props) => {
