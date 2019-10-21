@@ -22,6 +22,10 @@ const bcryptSaltRound = 10
 const uploadFilePath = 'public/uploads'
 const readUploadFilePath = '/uploads'
 
+// API constants
+const API_USER_LIST = '/users'
+const API_USER_DETAIL = '/users/:id'
+
 module.exports = {
     url: {
         URL_HOME,
@@ -40,7 +44,10 @@ module.exports = {
         URL_POSTS_STORE,
         URL_POSTS_EDIT,
         URL_POSTS_UPDATE,
-        URL_POSTS_DELETE
+        URL_POSTS_DELETE,
+        
+        API_USER_LIST,
+        API_USER_DETAIL
     },
     bcryptSaltRound,
     uploadFilePath,

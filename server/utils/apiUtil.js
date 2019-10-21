@@ -2,7 +2,7 @@ const apiUrl = url => {
     return '/v1' + url;
 }
 
-const makeResponse = (res, message, status = 200, data = []) => {
+const makeResponse = (res, message, data = [], status = 200) => {
     return res.json({
         success: true,
         version: 'v1',
@@ -12,7 +12,7 @@ const makeResponse = (res, message, status = 200, data = []) => {
     })
 }
 
-const makeError = (res, status = 400, message = '', data = []) => {
+const makeError = (res, message = '', status = 400, data = []) => {
     return res.json({
         success: false,
         version: 'v1',

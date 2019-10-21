@@ -1,6 +1,6 @@
 const { Router } = require('express')
-const User = require('./../database/models/User')
 const ApiUtil = require('./../utils/apiUtil')
+const userAPIController = require('./../api/UserAPIController')
 const CONSTANT = require('./../constants')
 
 
@@ -14,11 +14,7 @@ apiRouter.get(basePath + '/welcome', (req, res) => {
     )
 })
 
-apiRouter.get(basePath + '/users', async (req, res) => {
-    const users = await User.find({})
-    return res.json(
-
-    )
-})
+apiRouter.get(ApiUtil.apiUrl(CONSTANT.url.API_USER_LIST), userAPIController.listUser)
+apiRouter.get(ApiUtil.apiUrl(CONSTANT.url.API_USER_DETAIL), userAPIController.detailUser)
 
 module.exports = apiRouter
