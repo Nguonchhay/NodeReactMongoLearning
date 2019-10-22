@@ -6,7 +6,8 @@ const mongoose = require('mongoose')
 
 const database = (app) => {
     // MongoDB connection
-    mongoose.connect(process.env.MONGO_URI + '/' + process.env.MONGO_DB)
+    mongoose.set('useCreateIndex', true)
+    mongoose.connect(process.env.MONGO_URI + '/' + process.env.MONGO_DB, { useNewUrlParser: true })
 
     // Use session
     const mongoStore = connnectMongo(expressSession)
@@ -14,7 +15,10 @@ const database = (app) => {
         secret: process.env.SESSION_SECRET,
         store: new mongoStore({
             mongooseConnection: mongoose.connection
-        })
+        }),
+        proxy: true,
+        resave: true,
+        saveUninitialized: true
     }))
 }
 
