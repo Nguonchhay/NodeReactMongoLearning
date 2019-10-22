@@ -1,3 +1,4 @@
 .env
 config/env.js
 /public/uploads/
+yarn-error.log
