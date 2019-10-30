@@ -14,8 +14,14 @@ apiRouter.get(basePath + '/welcome', (req, res) => {
     )
 })
 
-apiRouter.get(ApiUtil.apiUrl(CONSTANT.url.API_USER_LIST), userAPIController.listUser)
-apiRouter.get(ApiUtil.apiUrl(CONSTANT.url.API_USER_DETAIL), userAPIController.detailUser)
-apiRouter.put(ApiUtil.apiUrl(CONSTANT.url.API_USER_DETAIL), userAPIController.updateUser)
+/**
+ * API Users
+ */
+apiRouter.route(ApiUtil.apiUrl(CONSTANT.url.API_USERS))
+    .get(userAPIController.listUser)
+
+apiRouter.route(ApiUtil.apiUrl(CONSTANT.url.API_USERS + '/:id'))
+    .get(userAPIController.detailUser)
+    .put(userAPIController.updateUser)
 
 module.exports = apiRouter
