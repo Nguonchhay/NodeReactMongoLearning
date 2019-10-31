@@ -1,6 +1,8 @@
 'use strict';
 
 const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
+const CONSTANT = require('./../../constants')
 
 const UserSchema = mongoose.Schema({
     role: {
@@ -27,6 +29,26 @@ const UserSchema = mongoose.Schema({
         type: Date,
         default: new Date()
     }
+})
+
+// Execute before each user.save() call
+UserSchema.pre('save', function (next) {
+    var user = this
+
+    // Break out if the password hasn't changed
+    if (!user.isModified('password')) {
+        return next()
+    }
+  
+    // Password changed so we need to hash it
+    bcrypt.hash(user.password, CONSTANT.bcryptSaltRound, function(err, hash) {
+        if (err) {
+            return next(err)
+        }
+
+        user.password = hash
+        next()
+    })
 })
 
 module.exports = mongoose.model('User', UserSchema)

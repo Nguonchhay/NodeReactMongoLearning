@@ -15,6 +15,56 @@ const listUser = async (req, res) => {
     )
 }
 
+// http://scottksmith.com/blog/2014/05/29/beer-locker-building-a-restful-api-with-node-passport/
+const storeUser = async (req, res) => {
+    let userData = req.body
+    if (req.files && req.files.profile) {
+        // Move upload file
+        profile.mv(path.resolve(__dirname, '../' + CONSTANT.uploadFilePath + '/' + profile.name), (err) => {
+            userData = {
+                ...userData,
+                profile: CONSTANT.readUploadFilePath + '/' + profile.name
+            }
+
+            // Store user to database
+            User.create(userData, (err, createdUser) => {
+                if (err) {
+                    return ApiUtil.makeError(
+                        res,
+                        'Something went wrong',
+                        400,
+                        userData
+                    )
+                }
+
+                return ApiUtil.makeResponse(
+                    res,
+                    'User was saved successfully',
+                    [createdUser]
+                )
+            })
+        })
+    } else {
+        // Store user to database
+        User.create(userData, (err, createdUser) => {
+            if (err) {
+                return ApiUtil.makeError(
+                    res,
+                    err.errmsg,
+                    400,
+                    userData
+                )
+            }
+
+            return ApiUtil.makeResponse(
+                res,
+                'User was saved successfully',
+                [createdUser]
+            )
+        })
+    }
+}
+
 const detailUser = async (req, res) => {
     const user = await User.findById(req.params.id)
 
@@ -109,6 +159,7 @@ const updateUserIfExist = async (id, data) => {
 
 module.exports = {
     listUser,
+    storeUser,
     detailUser,
     updateUser
 }

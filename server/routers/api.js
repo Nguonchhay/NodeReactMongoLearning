@@ -19,6 +19,7 @@ apiRouter.get(basePath + '/welcome', (req, res) => {
  */
 apiRouter.route(ApiUtil.apiUrl(CONSTANT.url.API_USERS))
     .get(userAPIController.listUser)
+    .post(userAPIController.storeUser)
 
 apiRouter.route(ApiUtil.apiUrl(CONSTANT.url.API_USERS + '/:id'))
     .get(userAPIController.detailUser)
