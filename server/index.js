@@ -3,6 +3,9 @@ require('dotenv').config()
 const express = require('express')
 const connnectFlash = require('connect-flash')
 const cloudinary = require('cloudinary')
+const passport = require('passport')
+
+const authAPIMiddleware = require('./middlewares/authAPIMiddleware')
 
 // Create application context
 const app = express()
@@ -16,6 +19,9 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
     cloud_name: process.env.CLOUDINARY_NAME
 })
+
+// User Passport
+app.use(passport.initialize())
 
 // Flash message
 app.use(connnectFlash())
@@ -32,7 +38,7 @@ app.use('/', routers.webRouter)
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/api', routers.apiRouter)
+app.use('/api', authAPIMiddleware.isAuthenticated, routers.apiRouter)
 
 // 404 page
 app.use((req, res) => res.render('404'))
