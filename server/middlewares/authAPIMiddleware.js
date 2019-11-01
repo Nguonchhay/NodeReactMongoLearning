@@ -1,35 +1,25 @@
 const passport = require('passport')
 const BasicStrategy = require('passport-http').BasicStrategy
 
-const User = require('./../database/models/User')
+const OAuthClient = require('./../database/models/OAuthClient')
 
 
-passport.use(new BasicStrategy(
-    (email, password, next) => {
-        User.findOne({email}, (err, user) => {
+passport.use('client-basic', new BasicStrategy(
+    (clientId, clientSecret, next) => {
+        OAuthClient.findOne({client_id: clientId}, (err, oauthClient) => {
             if (err) {
                 return next(err)
             }
 
-            if (!user) {
+            if (!oauthClient || oauthClient.clientSecret !== clientSecret) {
                 return next(null, false)
             }
 
-            user.verifyPassword(password, (err, isMatch) => {
-                if (err) {
-                    return next(err)
-                }
-
-                if (!isMatch) {
-                    return next(null, false)
-                }
-
-                return next(null, user)
-            })
+            return next(null, oauthClient)
         })
     }
 ))
 
 module.exports = {
-    isAuthenticated: passport.authenticate('basic', { session: false })
+    isClientAuthenticated: passport.authenticate('client-basic', { session: false })
 }

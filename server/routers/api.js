@@ -1,6 +1,7 @@
 const { Router } = require('express')
 const ApiUtil = require('./../utils/apiUtil')
 const userAPIController = require('./../api/UserAPIController')
+const oauthClientAPIController = require('./../api/OauthClientAPIController')
 const CONSTANT = require('./../constants')
 
 
@@ -24,5 +25,12 @@ apiRouter.route(ApiUtil.apiUrl(CONSTANT.url.API_USERS))
 apiRouter.route(ApiUtil.apiUrl(CONSTANT.url.API_USERS + '/:id'))
     .get(userAPIController.detailUser)
     .put(userAPIController.updateUser)
+
+/**
+ * API OAuth Clients
+ */
+apiRouter.route(ApiUtil.apiUrl(CONSTANT.url.API_OAUTH_CLIENTS))
+    .get(oauthClientAPIController.listClient)
+    .post(oauthClientAPIController.storeClient)
 
 module.exports = apiRouter

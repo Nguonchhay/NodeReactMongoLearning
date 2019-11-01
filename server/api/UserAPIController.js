@@ -15,7 +15,6 @@ const listUser = async (req, res) => {
     )
 }
 
-// http://scottksmith.com/blog/2014/05/29/beer-locker-building-a-restful-api-with-node-passport/
 const storeUser = async (req, res) => {
     let userData = req.body
     if (req.files && req.files.profile) {

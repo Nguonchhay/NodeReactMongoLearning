@@ -1,0 +1,58 @@
+@layout('layouts.app')
+
+@section('content')
+  <div class="container-fluid">
+    <div class="card mb-3">
+      <div class="card-header">
+        <i class="fas fa-table"></i>
+        OAuth Clients
+      </div>
+
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Client Id</th>
+                <th>Client Secret</th>
+                <th>User Id</th>
+                <th>
+                  <a href="/clients/create">
+                    <i class="fas fa-plus"></i> New
+                  </a>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              @each(oauthClient in oauthClients)
+                <tr>
+                  <td>{{ ($loop.index + 1) }}</td>
+                  <td>{{ oauthClient.name }}</td>
+                  <td>{{ oauthClient.id }}</td>
+                  <td>{{ oauthClient.secret }}</td>
+                  <td>{{ oauthClient.userId }}</td>
+                  <td>
+                    <ul>
+                      <li>
+                      <a href="/clients/{{ oauthClient.id }}/edit"><i class="far fa-edit"></i> Edit</a>
+                      </li>
+                      <li>
+                        <form action="/clients/{{ oauthClient.id }}/delete" method="POST">
+                          <button type="submit" onClick="return confirm('Are you sure?');" href="">
+                            <i class="fas fa-fw fa-trash"></i>Delete
+                          </button>
+                        </form>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              @endeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+@endsection

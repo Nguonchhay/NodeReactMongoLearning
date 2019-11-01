@@ -10,6 +10,7 @@ const authMiddleware = require('./../middlewares/authMiddleware')
 const userController = require('./../controllers/userController')
 const loginController = require('./../controllers/loginController')
 const postController = require('./../controllers/postController')
+const authClientController = require('../api/OauthClientAPIController')
 
 // webRouter middleware that happen all routes
 webRouter.use((req, res, next) => {
