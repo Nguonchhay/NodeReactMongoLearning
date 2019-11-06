@@ -7,6 +7,13 @@ const authAPIMiddleware = require('./../middlewares/authAPIMiddleware')
 
 const apiRouter = Router()
 
+/**
+ * @route GET /welcome
+ * @group General - Testing APIs
+ * 
+ * @returns {object} 200 - API is working.
+ * @returns {Error}  default - Unexpected error
+ */
 apiRouter.get(ApiUtil.apiUrl('/welcome'), (req, res) => {
     return ApiUtil.makeResponse(
         res,

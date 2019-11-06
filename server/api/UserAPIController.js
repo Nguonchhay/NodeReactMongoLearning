@@ -5,6 +5,17 @@ const ApiUtil = require('./../utils/apiUtil')
 const CONSTANT = require('./../constants')
 
 
+/**
+ * @route GET /users
+ * @group User - User list
+ * 
+ * @produces application/json application/json
+ * @consumes application/json application/json
+ * 
+ * @returns {User.model} 200 - User list
+ * 
+ * @security JWT
+ */
 const listUser = async (req, res) => {
     const users = await User.find({})
 

@@ -49,3 +49,8 @@ yarn start
 cd client
 yarn start
 ```
+
+Documentations
+---
+
+* API docs: <app_host>:<app_port>/api-docs

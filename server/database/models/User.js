@@ -4,6 +4,15 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const CONSTANT = require('./../../constants')
 
+/**
+ * @typedef User
+ * @property {enum} role.required - User role - eg: admin, editor
+ * @property {name} name.required
+ * @property {string} email.required - Provide a validate email format - eg: name@domain
+ * @property {string} password.required
+ * @property {enum} sex - User gender - eg: Male, Female
+ * @property {string} profile
+ */
 const UserSchema = mongoose.Schema({
     role: {
         type: String,

@@ -38,10 +38,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api', routers.apiRouter)
 
+// Register Swagger for API docs
+require('./documents/swagger')(app)
+
 // 404 page
 app.use((req, res) => res.render('404'))
 
 // Start serve with predefine port
-app.listen(process.env.PORT, () => {
-    console.log('Server started on port: ' + process.env.PORT)
+app.listen(process.env.APP_PORT, () => {
+    console.log(`Server started on host: ${process.env.APP_HOST} and port: ${process.env.APP_PORT}`)
+    console.log(`Server url ${process.env.APP_HOST}:${process.env.APP_PORT}`)
+    console.log(`API docs url ${process.env.APP_HOST}:${process.env.APP_PORT}/api-docs`)
 })
