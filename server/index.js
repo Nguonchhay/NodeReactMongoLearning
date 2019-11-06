@@ -5,8 +5,6 @@ const connnectFlash = require('connect-flash')
 const cloudinary = require('cloudinary')
 const passport = require('passport')
 
-const authAPIMiddleware = require('./middlewares/authAPIMiddleware')
-
 // Create application context
 const app = express()
 
@@ -38,7 +36,7 @@ app.use('/', routers.webRouter)
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/api', authAPIMiddleware.isAuthenticated, routers.apiRouter)
+app.use('/api', routers.apiRouter)
 
 // 404 page
 app.use((req, res) => res.render('404'))
