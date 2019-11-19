@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col } from 'reactstrap';
 
 import DefaultLayout from '../layouts/DefaultLayout';
-import ContactForm from './../../components/forms/ContactForm';
+import ContactForm from '../../components/Forms/ContactForm';
 
 const ContactUsPage = () => {
     return (

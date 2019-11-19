@@ -4,7 +4,9 @@ import {
     URL_PAGES,
     URL_CONTACT_US,
     URL_STYLE_GUIDE
-} from './url';
+} from './url'
+
+import { LANG_EN, LANG_KM } from './general'
 
 export const navigations = [
     {
@@ -34,3 +36,14 @@ export const navigations = [
         ]
     }
 ];
+
+export const languages = [
+    {
+        'key': LANG_EN,
+        'value': 'English'
+    },
+    {
+        'key': LANG_KM,
+        'value': 'Khmer'
+    }
+]
