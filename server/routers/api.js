@@ -1,6 +1,7 @@
 const { Router } = require('express')
 const ApiUtil = require('./../utils/apiUtil')
 const userAPIController = require('./../api/UserAPIController')
+const settingAPIController = require('./../api/SettingAPIController')
 const CONSTANT = require('./../constants')
 
 const authAPIMiddleware = require('./../middlewares/authAPIMiddleware')
@@ -13,6 +14,8 @@ apiRouter.get(ApiUtil.apiUrl('/welcome'), (req, res) => {
         'API is working.'
     )
 })
+
+apiRouter.post(ApiUtil.apiUrl(CONSTANT.url.TEST_EMAIL), settingAPIController.testSendEmail)
 
 /**
  * API Users

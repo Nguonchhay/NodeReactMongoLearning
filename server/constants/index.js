@@ -24,6 +24,7 @@ const readUploadFilePath = '/uploads'
 
 // API constants
 const API_USERS = '/users'
+const TEST_EMAIL = '/test/sendemail'
 
 module.exports = {
     url: {
@@ -45,6 +46,7 @@ module.exports = {
         URL_POSTS_UPDATE,
         URL_POSTS_DELETE,
         
+        TEST_EMAIL,
         API_USERS
     },
     bcryptSaltRound,

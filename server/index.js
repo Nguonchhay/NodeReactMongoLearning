@@ -42,6 +42,6 @@ app.use('/api', routers.apiRouter)
 app.use((req, res) => res.render('404'))
 
 // Start serve with predefine port
-app.listen(process.env.PORT, () => {
-    console.log('Server started on port: ' + process.env.PORT)
+app.listen(process.env.APP_PORT, () => {
+    console.log('Server started on port: ' + process.env.APP_PORT)
 })
