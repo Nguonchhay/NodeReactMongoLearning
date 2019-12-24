@@ -6,8 +6,9 @@ import {
     NavbarBrand
 } from 'reactstrap'
 
-import Navigation from './../Navigation'
-import LanguageMenu from './../LanguageMenu'
+import Navigation from './Navigation'
+import LanguageMenu from './LanguageMenu'
+
 
 const Header = () => {
     const [isOpen, toggle] = useState(false);

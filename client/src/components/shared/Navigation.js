@@ -11,7 +11,8 @@ import {
     DropdownItem
 } from 'reactstrap';
 
-import { navigations } from './../constants';
+import { navigations } from './../../constants';
+
 
 const Navigation = (props) => {
     

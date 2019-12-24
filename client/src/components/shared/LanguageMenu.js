@@ -1,9 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { switchLanguage } from './../redux/actions';
+import { switchLanguage } from './../../redux/actions';
 import { Nav, NavItem, NavLink } from 'reactstrap';
-import { languages } from './../constants';
+
+import { languages } from './../../constants';
+
 
 const LanguageMenu = (props) => {
 
