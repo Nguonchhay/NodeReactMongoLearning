@@ -11,12 +11,12 @@ import { LANG_EN, LANG_KM } from './general'
 export const navigations = [
     {
         'slug': URL_HOME,
-        'title': 'Home',
+        'title': 'home',
         'order': 0
     },
     {
         'slug': URL_ABOUT_US,
-        'title': 'About Us',
+        'title': 'about_us',
         'order': 10
     },
     {

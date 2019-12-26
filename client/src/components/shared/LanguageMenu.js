@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { switchLanguage } from './../../redux/actions';
 import { Nav, NavItem, NavLink } from 'reactstrap';
@@ -9,9 +9,6 @@ import { languages } from './../../constants';
 
 const LanguageMenu = (props) => {
 
-    const currentLanguage = useSelector(
-        state => state.languageReducer.language
-    );
     const dispatch = useDispatch();
 
     // Handle event switch language
@@ -29,8 +26,6 @@ const LanguageMenu = (props) => {
             )
         })
     };
-
-    console.log('current language: ' + currentLanguage);
 
     return (
         <Nav>

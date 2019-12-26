@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import {
     Collapse,
     Nav,
@@ -15,13 +16,20 @@ import { navigations } from './../../constants';
 
 
 const Navigation = (props) => {
+
+    const curLang = useSelector(
+        state => state.languageReducer.language
+    );
+    console.log('Cur Lang: ', curLang);
     
     const renderNavigation = () => {
         return navigations.map(nav => {
             if (nav.children === undefined) {
                 return (
                     <NavItem key={nav.slug}>
-                        <NavLink to={nav.slug} className="nav-link" activeClassName="active">{nav.title}</NavLink>
+                        <NavLink to={nav.slug} className="nav-link" activeClassName="active">
+                            <FormattedMessage id={nav.title} defaultMessage={nav.title} />
+                        </NavLink>
                     </NavItem>
                 )
             }
@@ -36,7 +44,9 @@ const Navigation = (props) => {
                             nav.children.map(item => {
                                 return (
                                     <DropdownItem key={item.slug}>
-                                        <NavLink to={item.slug} activeClassName="active" className="nav-link">{item.title}</NavLink>
+                                        <NavLink to={item.slug} activeClassName="active" className="nav-link">
+                                            <FormattedMessage id={item.title} defaultMessage={item.title} />
+                                        </NavLink>
                                     </DropdownItem>
                                 )
                             })
