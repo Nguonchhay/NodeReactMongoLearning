@@ -4,11 +4,13 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon index.js"
+    "prestart": "cp -a env.example .env",
+    "start": "node index.js",
+    "start:local": "nodemon index.js"
   },
   "engines": {
-    "node": "10.16.x",
-    "npm": "6.4.x"
+    "node": ">= 12.13.x",
+    "yarn": ">= 1.19"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",

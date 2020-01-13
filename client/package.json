@@ -8,6 +8,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "engines": {
+    "node": ">= 12.x",
+    "yarn": ">= 1.19"
+  },
   "dependencies": {
     "bootstrap": "^4.3.1",
     "jsonwebtoken": "^8.5.1",

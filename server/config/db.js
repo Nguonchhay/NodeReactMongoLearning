@@ -7,7 +7,9 @@ const mongoose = require('mongoose')
 const database = (app) => {
     // MongoDB connection
     mongoose.set('useCreateIndex', true)
-    mongoose.connect(process.env.MONGO_URI + '/' + process.env.MONGO_DB, { useNewUrlParser: true })
+    mongoose.set('useUnifiedTopology', true)
+    mongoose.set('useNewUrlParser', true)
+    mongoose.connect(process.env.MONGODB_URI + '/' + process.env.MONGODB_DB)
 
     // Use session
     const mongoStore = connnectMongo(expressSession)
